@@ -11,7 +11,6 @@ class EuroSATDataset(Dataset):
     def __init__(self, root_dir, whitelist_classes, bands = [3,2,1]):
         self.root_dir  = root_dir
         self.classes   = sorted(os.listdir(root_dir))
-        self.mode      = mode
         self.bands     = bands
 
         self.mmin, self.mmax = [200]*len(bands), [1800]*len(bands) # FIXME: these values are valid only for EuroSATAllBands 
