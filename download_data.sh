@@ -5,19 +5,19 @@ rm -f EuroSAT.zip
 
 echo "Downloading EuroSAT"
 # RGB
-wget --no-check-certificate https://madm.dfki.de/files/sentinel/EuroSAT.zip 
+#wget --no-check-certificate https://madm.dfki.de/files/sentinel/EuroSAT.zip 
 # MultiSpectral
-#wget --no-check-certificate https://madm.dfki.de/files/sentinel/EuroSATallBands.zip 
+wget --no-check-certificate https://madm.dfki.de/files/sentinel/EuroSATallBands.zip 
 
 echo "Unzip folder and prepare"
 
 # RGB
-unzip -qq EuroSAT.zip
-mv 2750 EuroSAT/
+#unzip -qq EuroSAT.zip
+#mv 2750 EuroSAT/
 
 # Multispectral
-#unzip -qq EuroSATallBands.zip
-#mv ds/images/remote_sensing/otherDatasets/sentinel_2/tif EuroSAT/
+unzip -qq EuroSATallBands.zip
+mv ds/images/remote_sensing/otherDatasets/sentinel_2/tif EuroSAT/
 
 # Split ratios
 TRAIN_RATIO=80
