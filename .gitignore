@@ -1,1 +1,4 @@
 EuroSAT*
+__pycache__
+lightning_logs
+saved_models
