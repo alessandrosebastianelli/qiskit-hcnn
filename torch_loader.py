@@ -46,29 +46,30 @@ class EuroSATDataset(Dataset):
         return b_in, b_ou
 
 class EuroSATDataModule(pl.LightningDataModule):
-    def __init__(self, whitelist_classes, batch_size=64, bands=[3,2,1], num_workers=9):
+    def __init__(self, whitelist_classes, root_dir='', batch_size=64, bands=[3,2,1], num_workers=9):
         super().__init__()
         self.whitelist_classes = whitelist_classes
         self.batch_size  = batch_size
         self.num_workers = num_workers
         self.bands       = bands
+        self.root_dir    = root_dir
 
     def setup(self, stage=None):
         transform          = transforms.Compose([transforms.ToTensor()])
         self.train_dataset = EuroSATDataset(
-            root_dir = os.path.join('EuroSAT-split', 'train'), 
+            root_dir = os.path.join(self.root_dir, 'EuroSAT-split', 'train'), 
             whitelist_classes = self.whitelist_classes, 
             bands=self.bands, 
         )
 
         self.valid_dataset = EuroSATDataset(
-            root_dir = os.path.join('EuroSAT-split', 'val'),  
+            root_dir = os.path.join(self.root_dir, 'EuroSAT-split', 'val'),  
              whitelist_classes = self.whitelist_classes, 
              bands=self.bands, 
         )
 
         self.test_dataset = EuroSATDataset(
-            root_dir = os.path.join('EuroSAT-split', 'test'),  
+            root_dir = os.path.join(self.root_dir, 'EuroSAT-split', 'test'),  
              whitelist_classes = self.whitelist_classes, 
              bands=self.bands, 
         )
