@@ -17,7 +17,8 @@ Contributions, feedback, and bug reports are highly appreciated to help improve 
 ## This is a qiskit adapted version of https://github.com/alessandrosebastianelli/QML4EO-tutorial/tree/main
 
 
-You can run this tutorial on colab:
+You can run this tutorial on colab with **Runtime>Change runtme type> T4 GPU**:
+
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/alessandrosebastianelli/qiskit-hcnn/blob/main/HQCNN.ipynb)
 
