@@ -53,6 +53,8 @@ class EuroSATDataset(Dataset):
     def __getitem__(self, idx):
 
         if torch.cuda.is_available(): device = torch.device('cuda')
+        else: device = torch.device('cpu')
+        
         img_path, label = self.data[idx]
         b_in, _, _ = load(img_path)
         b_in = b_in.astype(np.float32) 
