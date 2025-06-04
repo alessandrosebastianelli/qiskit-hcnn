@@ -8,7 +8,29 @@ import os
 from pyosv.io.reader import load
 
 class EuroSATDataset(Dataset):
+    
     def __init__(self, root_dir, whitelist_classes, bands = [3,2,1]):
+        self.root_dir  = root_dir
+        self.classes   = sorted(os.listdir(root_dir))
+        self.bands     = bands
+
+        self.mmin, self.mmax = [200]*len(bands), [1800]*len(bands) # FIXME: these values are valid only for EuroSATAllBands 
+
+        self.data = []
+
+        # Create a mapping from class name to label based on whitelist order
+        whitelist_to_label = {class_name: idx for idx, class_name in enumerate(whitelist_classes)}
+
+        for class_label in self.classes:
+            if class_label in whitelist_to_label:
+                class_path = os.path.join(root_dir, class_label)
+
+                for img_file in os.listdir(class_path):
+                    img_path = os.path.join(class_path, img_file)
+                    label = whitelist_to_label[class_label]
+                    self.data.append((img_path, label))
+    
+    def __old__init__(self, root_dir, whitelist_classes, bands = [3,2,1]):
         self.root_dir  = root_dir
         self.classes   = sorted(os.listdir(root_dir))
         self.bands     = bands
