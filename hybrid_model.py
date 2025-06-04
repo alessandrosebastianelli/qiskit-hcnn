@@ -93,8 +93,8 @@ class LightningAlexNetModule(pl.LightningModule):
         logits = self(x)
         loss = self.criterion(logits, y)
         acc = (logits.argmax(dim=1) == y).float().mean()
-        self.log("train_loss", loss)
-        self.log("train_acc", acc)
+        self.log("train_loss", loss, on_epoch=True, prog_bar=True)
+        self.log("train_acc", acc, on_epoch=True, prog_bar=True)
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -102,8 +102,8 @@ class LightningAlexNetModule(pl.LightningModule):
         logits = self(x)
         loss = self.criterion(logits, y)
         acc = (logits.argmax(dim=1) == y).float().mean()
-        self.log("val_loss", loss, prog_bar=True)
-        self.log("val_acc", acc, prog_bar=True)
+        self.log("val_loss", loss, on_epoch=True, prog_bar=True)
+        self.log("val_acc", acc, on_epoch=True, prog_bar=True)
 
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(), lr=self.hparams.lr)
